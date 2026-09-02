@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: pymatgen-lammps
-  version: "0.5.1"
+  version: 0.5.1
 
 package:
   name: ${{ name|lower }}
@@ -17,7 +17,7 @@ source:
 build:
   number: 2
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
       - pylammps=pmg_lammps.__main__:main
@@ -26,7 +26,7 @@ requirements:
   host:
     - pip
     - pytest-runner
-    - python ${{ python_min }}
+    - python ${{ python_min }}.*
     - setuptools >=38.6.0
   run:
     - pymatgen
@@ -45,7 +45,7 @@ tests:
   - requirements:
       run:
         - pip
-        - python ${{ python_min }}
+        - python ${{ python_min }}.*
     script:
       - pylammps --help
 
